@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <title>Apocalypse</title>
+    <style>
+		#zombie_map {
+		    height: 80%;
+		    width: 80%;
+		    position: absolute;
+		    background-color: grey;
+		    margin-left:10%;
+		}
+	</style>
+  </head>
+  <body>
+    <h1 style="text-align:center;margin:30px;">Apocalypse</h1>
+    <div id="zombie_map"></div>
+    <script>
+    	var map;
+    	var all_markers = [];
+    	var data = `40.08228238806431, -111.60162939870199 zombie.png
+40.08169968014332, -111.6046754937033 hospital.png
+40.08137499672702, -111.6057340605472 weapons.png
+40.08278836705792, -111.6043504809967 zombie.png
+40.082711744758946, -111.60527750756263 zombie.png
+40.08179023558483, -111.6050016105744 zombie.png`
+		var markers = data.split("\n");
+
+		function initMap() {
+
+			const myLatLng = { lat: 40.08231219015568, lng: -111.60429225759033 };
+			map = new google.maps.Map(document.getElementById("zombie_map"), {
+				zoom: 18,
+				center: myLatLng,
+			});
+
+
+			if(navigator.geolocation) {
+    			navigator.geolocation.watchPosition(set_my_position);
+			} else {
+				alert("Geolocation doesn't work in your browser");
+			}
+
+
+			for(var i=0; i < markers.length; i++){
+
+				var marker_data = markers[i].trim();
+	 			marker_data = marker_data.split(" ");
+	 			var latitude = marker_data[0];
+				var longitude = marker_data[1];
+				var emoji = marker_data[2];
+
+				var marker = new google.maps.Marker({
+					position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+					map,
+					title: "Marker",
+					icon: emoji
+				});
+
+				all_markers.push(marker);
+
+			}
+		}
+
+		function set_my_position(position) {
+
+			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+			var myLocation = new google.maps.Marker({
+				position: pos,
+				map,
+				title: 'Me',
+				icon: 'player.png'
+			});
+
+		}
+ 
+    </script>
+    <script async
+  		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRmad69TWBccqkXae-Dp0V5CtNUfZ3gSE&callback=initMap">
+	</script>
+  </body>
+</html>
+
+
