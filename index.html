@@ -16,6 +16,7 @@
     <div id="zombie_map"></div>
     <script>
     	var map;
+	var tolerance = 10;
 	var old_position;
     	var all_markers = [];
     	var data = `40.08228238806431, -111.60162939870199 zombie.png
@@ -81,11 +82,20 @@
 				icon: 'player.png'
 			});
 			old_position = marker;
+			for(var i=0; i < all_markers.length; i++){
+    				var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, all_markers[i].getPosition());
+				if( distance < tolerance ){
+    					var what_is_it = all_markers[i].getIcon();
+					what_is_it = what_is_it.replace(".png", "");
+					alert("Found the " + what_is_it );
+					all_markers[i].setMap(null);
+				}
+			}
 		}
  
     </script>
     <script async
-  		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRmad69TWBccqkXae-Dp0V5CtNUfZ3gSE&callback=initMap">
+  		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRmad69TWBccqkXae-Dp0V5CtNUfZ3gSE&callback=initMap&libraries=geometry">
 	</script>
   </body>
 </html>
