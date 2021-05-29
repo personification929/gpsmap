@@ -73,7 +73,7 @@
 
 
 			if(navigator.geolocation) {
-    			navigator.geolocation.watchPosition(set_my_position);
+    				navigator.geolocation.watchPosition(set_my_position);
 			} else {
 				alert("Geolocation doesn't work in your browser");
 			}
@@ -110,7 +110,7 @@
 				icon: 'player.png'
 				
 			});
-			old_position = myLocation;
+			old_position = pos;
 			for(var i=0; i < all_markers.length; i++){
     				var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, all_markers[i].getPosition());
 				if( distance < tolerance ){
