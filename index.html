@@ -9,13 +9,34 @@
 		    background-color: grey;
 		    margin-left:10%;
 		}
+	    	.heart, .defense {
+			display:inline-block;
+			text-align:left;
+	    	}
+	    	title {
+			font-family:sans-serif;	
+	    }
 	</style>
   </head>
   <body>
-    <h1 style="text-align:center;margin:30px;">Apocalypse</h1>
-    <div id="zombie_map"></div>
+  	<h1 style="text-align:center;margin:30px;">Apocalypse</h1>
+  	<div id="zombie_map"></div>
+  	<div id="HUD">
+		<img class="heart" id="1" src="fullHeart.png">
+		<img class="heart" id="2" src="fullHeart.png">
+		<img class="heart" id="3" src="fullHeart.png">
+		<img class="heart" id="4" src="fullHeart.png">
+		<img class="heart" id="5" src="fullHeart.png">
+		<img class="heart" id="6" src="fullHeart.png">
+		<br>
+		<img class="defense" id="d1" src="empty.png">
+		<img class="defense" id="d2" src="empty.png">
+		<img class="defense" id="d3" src="empty.png">
+	</div>
     <script>
     	var map;
+	var hearts;
+	var defense;
 	var score;
 	var tolerance = 10;
 	var old_position;
@@ -98,14 +119,100 @@
 					what_is_it = what_is_it.replace(".png", "");
 					alert("Found the " + what_is_it );
 					all_markers[i].setMap(null);
-					if (what_is_it != "zombie") {
-						score = score + 10;
-						alert("You just earned 10 points. Your score is now " + score + " points!");
+					if (what_is_it == "zombie") {
+						hearts = hearts - (3 - defense);
+						alert("Uh oh! You were attacked by a zombie!");
+					};
+					if (what_is_it == "hospital") {
+						hearts = hearts + 1;
+						alert("Yay! You found medical supplies!");
+					};
+					if (what_is_it == "weapons") {
+						defense = defense + 1;
+						alert("Cool! Now you can defend yourself!");
 					};
 				};
 			};
 		};
- 
+ 		if (hearts == 0) {
+		   document.getElementByID("6").src = "noHeart.png";
+		   document.getElementByID("5").src = "noHeart.png";
+		   document.getElementByID("4").src = "noHeart.png";
+		   document.getElementByID("3").src = "noHeart.png";
+		   document.getElementByID("2").src = "noHeart.png";
+		   document.getElementByID("1").src = "noHeart.png";
+		}
+	   	if (hearts == 1) {
+		   document.getElementByID("6").src = "noHeart.png";
+		   document.getElementByID("5").src = "noHeart.png";
+		   document.getElementByID("4").src = "noHeart.png";
+		   document.getElementByID("3").src = "noHeart.png";
+		   document.getElementByID("2").src = "noHeart.png";
+		   document.getElementByID("1").src = "fullHeart.png";
+		}
+	    	if (hearts == 2) {
+		   document.getElementByID("6").src = "noHeart.png";
+		   document.getElementByID("5").src = "noHeart.png";
+		   document.getElementByID("4").src = "noHeart.png";
+		   document.getElementByID("3").src = "noHeart.png";
+		   document.getElementByID("2").src = "fullHeart.png";
+		   document.getElementByID("1").src = "fullHeart.png";
+		}
+	   	if (hearts == 3) {
+		   document.getElementByID("6").src = "noHeart.png";
+		   document.getElementByID("5").src = "noHeart.png";
+		   document.getElementByID("4").src = "noHeart.png";
+		   document.getElementByID("3").src = "fullHeart.png";
+		   document.getElementByID("2").src = "fullHeart.png";
+		   document.getElementByID("1").src = "fullHeart.png";
+		}
+	   	if (hearts == 3) {
+		   document.getElementByID("6").src = "noHeart.png";
+		   document.getElementByID("5").src = "noHeart.png";
+		   document.getElementByID("4").src = "fullHeart.png";
+		   document.getElementByID("3").src = "fullHeart.png";
+		   document.getElementByID("2").src = "fullHeart.png";
+		   document.getElementByID("1").src = "fullHeart.png";
+		}
+	    	if (hearts == 4) {
+		   document.getElementByID("6").src = "noHeart.png";
+		   document.getElementByID("5").src = "noHeart.png";
+		   document.getElementByID("4").src = "fullHeart.png";
+		   document.getElementByID("3").src = "fullHeart.png";
+		   document.getElementByID("2").src = "fullHeart.png";
+		   document.getElementByID("1").src = "fullHeart.png";
+		}
+	    	if (hearts == 5) {
+		   document.getElementByID("6").src = "noHeart.png";
+		   document.getElementByID("5").src = "fullHeart.png";
+		   document.getElementByID("4").src = "fullHeart.png";
+		   document.getElementByID("3").src = "fullHeart.png";
+		   document.getElementByID("2").src = "fullHeart.png";
+		   document.getElementByID("1").src = "fullHeart.png";
+		}
+	    	if (hearts == 6) {
+		   document.getElementByID("6").src = "fullHeart.png";
+		   document.getElementByID("5").src = "fullHeart.png";
+		   document.getElementByID("4").src = "fullHeart.png";
+		   document.getElementByID("3").src = "fullHeart.png";
+		   document.getElementByID("2").src = "fullHeart.png";
+		   document.getElementByID("1").src = "fullHeart.png";
+		}
+	    	if (defense == 1) {
+		   document.getElementByID("d3").src = "empty.png";
+		   document.getElementByID("d2").src = "empty.png";
+		   document.getElementByID("d1").src = "weapons.png";
+		}
+	    	if (defense == 2) {
+		   document.getElementByID("d3").src = "empty.png";
+		   document.getElementByID("d2").src = "weapons.png";
+		   document.getElementByID("d1").src = "weapons.png";
+		}
+	    	if (defense == 3) {
+		   document.getElementByID("d3").src = "weapons.png";
+		   document.getElementByID("d2").src = "weapons.png";
+		   document.getElementByID("d1").src = "weapons.png";
+		}
     </script>
     <script async
   		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRmad69TWBccqkXae-Dp0V5CtNUfZ3gSE&callback=initMap&libraries=geometry">
