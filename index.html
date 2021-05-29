@@ -108,8 +108,9 @@
 				map,
 				title: 'Me',
 				icon: 'player.png'
+				
 			});
-			old_position = marker;
+			old_position = myLocation;
 			for(var i=0; i < all_markers.length; i++){
     				var distance = google.maps.geometry.spherical.computeDistanceBetween(pos, all_markers[i].getPosition());
 				if( distance < tolerance ){
