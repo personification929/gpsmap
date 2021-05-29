@@ -16,15 +16,16 @@
     <div id="zombie_map"></div>
     <script>
     	var map;
+	var score;
 	var tolerance = 10;
 	var old_position;
     	var all_markers = [];
     	var data = `40.08228238806431, -111.60162939870199 zombie.png
-40.08169968014332, -111.6046754937033 hospital.png
-40.08137499672702, -111.6057340605472 weapons.png
-40.08278836705792, -111.6043504809967 zombie.png
-40.082711744758946, -111.60527750756263 zombie.png
-40.08179023558483, -111.6050016105744 zombie.png`
+		    40.08169968014332, -111.6046754937033 hospital.png
+		    40.08137499672702, -111.6057340605472 weapons.png
+		    40.08278836705792, -111.6043504809967 zombie.png
+		    40.082711744758946, -111.60527750756263 zombie.png
+		    40.08179023558483, -111.6050016105744 zombie.png`
 		var markers = data.split("\n");
 
 		function initMap() {
@@ -89,9 +90,13 @@
 					what_is_it = what_is_it.replace(".png", "");
 					alert("Found the " + what_is_it );
 					all_markers[i].setMap(null);
-				}
-			}
-		}
+					if (what_is_it != "zombie") {
+						score = score + 10;
+						alert("You just earned 10 points. Your score is now " + score + " points!");
+					};
+				};
+			};
+		};
  
     </script>
     <script async
